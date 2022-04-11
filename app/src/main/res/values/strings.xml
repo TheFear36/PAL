@@ -3,4 +3,7 @@
     <string name="hint_enter_login">Введите логин</string>
     <string name="hint_enter_password">Введите пароль</string>
     <string name="text_enter">Войти</string>
+    <string name="error_unknown_login_or_password">Не верный логин или пароль</string>
+    <string name="registration_text">Регистрация</string>
+    <string name="forgot_my_password_text">Забыл пароль</string>
 </resources>
