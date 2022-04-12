@@ -1,8 +1,10 @@
 package com.thefear.pal.ui.login
 
+import com.thefear.pal.domain.UserRepository
+import com.thefear.pal.ui.user.UserFragment
 import java.lang.Thread.sleep
 
-class LoginPresenter : LoginContract.Presenter {
+class LoginPresenter(private val repository: UserRepository) : LoginContract.Presenter {
 
     private var view: LoginContract.View? = null
     private var isSuccess: Boolean = false
@@ -22,6 +24,7 @@ class LoginPresenter : LoginContract.Presenter {
         view?.showProgress()
         view?.getHandler()?.post {
             sleep(3_000L)
+            repository.getUser(login, password)
             view?.hideProgress()
             if (checkCredentials(login, password)) {
                 view?.setSuccess()

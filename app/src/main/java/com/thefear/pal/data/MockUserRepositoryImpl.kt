@@ -12,7 +12,7 @@ class MockUserRepositoryImpl : UserRepository {
     }
 
     override fun getUser(login: String, password: String): UserDTO {
-        TODO("Not yet implemented")
+        return UserDTO("","","","")
     }
 
     override fun forgotUserPassword(email: String): Boolean {
