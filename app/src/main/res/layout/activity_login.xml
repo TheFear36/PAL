@@ -4,7 +4,7 @@
     android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".ui.login.LoginActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/view_container"
@@ -40,18 +40,18 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/registration_button"
             style="@style/Widget.Material3.Button.OutlinedButton"
-            android:textSize="@dimen/standart_text"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/registration_text"
-            android:layout_height="wrap_content" />
+            android:textSize="@dimen/standart_text" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/forgot_password_button"
             style="@style/Widget.Material3.Button.TextButton"
-            android:textSize="@dimen/standart_text"
-            android:text="@string/forgot_my_password_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/forgot_my_password_text"
+            android:textSize="@dimen/standart_text" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 
 </FrameLayout>

@@ -1,4 +1,4 @@
-package com.thefear.pal
+package com.thefear.pal.ui.login
 
 import android.os.Bundle
 import android.os.Handler

@@ -1,8 +1,8 @@
-package com.thefear.pal
+package com.thefear.pal.ui.login
 
 import java.lang.Thread.sleep
 
-class LoginPresenter: LoginContract.Presenter {
+class LoginPresenter : LoginContract.Presenter {
 
     private var view: LoginContract.View? = null
     private var isSuccess: Boolean = false
@@ -36,6 +36,6 @@ class LoginPresenter: LoginContract.Presenter {
     }
 
     private fun checkCredentials(login: String, password: String): Boolean {
-        return login == "qwer"||password == "123"
+        return login == "qwer" || password == "123"
     }
 }
