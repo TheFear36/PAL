@@ -1,10 +1,10 @@
 package com.thefear.pal.ui.login
 
-import com.thefear.pal.domain.UserRepository
-import com.thefear.pal.ui.user.UserFragment
-import java.lang.Thread.sleep
+import com.thefear.pal.domain.LoginUsecase
 
-class LoginPresenter(private val repository: UserRepository) : LoginContract.Presenter {
+class LoginPresenter(
+    private val loginUsecase: LoginUsecase
+) : LoginContract.Presenter {
 
     private var view: LoginContract.View? = null
     private var isSuccess: Boolean = false
@@ -22,9 +22,8 @@ class LoginPresenter(private val repository: UserRepository) : LoginContract.Pre
 
     override fun onLogin(login: String, password: String) {
         view?.showProgress()
-        view?.getHandler()?.post {
-            sleep(3_000L)
-            repository.getUser(login, password)
+
+        loginUsecase.login(login, password) { result ->
             view?.hideProgress()
             if (checkCredentials(login, password)) {
                 view?.setSuccess()

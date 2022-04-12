@@ -9,7 +9,6 @@ import androidx.annotation.MainThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.thefear.pal.App
 import com.thefear.pal.R
 import com.thefear.pal.app
 import com.thefear.pal.databinding.ActivityLoginBinding
@@ -39,7 +38,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     private fun restorePresenter(): LoginPresenter {
         val presenter = lastCustomNonConfigurationInstance as? LoginPresenter
-        return presenter ?: LoginPresenter(app.repository)
+        return presenter ?: LoginPresenter(app.loginUsecase)
     }
 
     @MainThread
