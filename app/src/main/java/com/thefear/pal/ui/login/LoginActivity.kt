@@ -1,4 +1,4 @@
-package com.thefear.pal
+package com.thefear.pal.ui.login
 
 import android.os.Bundle
 import android.os.Handler
@@ -8,7 +8,11 @@ import android.widget.Toast
 import androidx.annotation.MainThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import com.thefear.pal.R
+import com.thefear.pal.app
 import com.thefear.pal.databinding.ActivityLoginBinding
+import com.thefear.pal.ui.user.UserFragment
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
     private lateinit var binding: ActivityLoginBinding
@@ -20,10 +24,10 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         setContentView(binding.root)
         presenter = restorePresenter()
         presenter?.onAttach(this)
-        binding.bLogin.setOnClickListener {
+        binding.loginButton.setOnClickListener {
             presenter?.onLogin(
-                binding.etLogin.text.toString(),
-                binding.etPassword.text.toString()
+                binding.loginEditText.text.toString(),
+                binding.passwordEditText.text.toString()
             )
         }
     }
@@ -34,12 +38,13 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     private fun restorePresenter(): LoginPresenter {
         val presenter = lastCustomNonConfigurationInstance as? LoginPresenter
-        return presenter ?: LoginPresenter()
+        return presenter ?: LoginPresenter(app.loginUsecase)
     }
 
     @MainThread
     override fun setSuccess() {
         binding.viewContainer.isVisible = false
+        openFragment(UserFragment.newInstance())
     }
 
     @MainThread
@@ -49,18 +54,25 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     @MainThread
     override fun showProgress() {
-        binding.bLogin.isEnabled = false
+        binding.loginButton.isEnabled = false
         binding.progressBar.visibility = View.VISIBLE
     }
 
     @MainThread
     override fun hideProgress() {
-        binding.bLogin.isEnabled = true
+        binding.loginButton.isEnabled = true
         binding.progressBar.visibility = View.GONE
     }
 
     override fun getHandler(): Handler {
         return Handler(Looper.getMainLooper())
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
 

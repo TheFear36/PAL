@@ -1,8 +1,10 @@
-package com.thefear.pal
+package com.thefear.pal.ui.login
 
-import java.lang.Thread.sleep
+import com.thefear.pal.domain.LoginUsecase
 
-class LoginPresenter: LoginContract.Presenter {
+class LoginPresenter(
+    private val loginUsecase: LoginUsecase
+) : LoginContract.Presenter {
 
     private var view: LoginContract.View? = null
     private var isSuccess: Boolean = false
@@ -20,8 +22,8 @@ class LoginPresenter: LoginContract.Presenter {
 
     override fun onLogin(login: String, password: String) {
         view?.showProgress()
-        view?.getHandler()?.post {
-            sleep(3_000L)
+
+        loginUsecase.login(login, password) { result ->
             view?.hideProgress()
             if (checkCredentials(login, password)) {
                 view?.setSuccess()
@@ -36,6 +38,6 @@ class LoginPresenter: LoginContract.Presenter {
     }
 
     private fun checkCredentials(login: String, password: String): Boolean {
-        return login == "qwer"||password == "123"
+        return login == "qwer" || password == "123"
     }
 }
