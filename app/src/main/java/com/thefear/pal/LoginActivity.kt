@@ -20,10 +20,10 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         setContentView(binding.root)
         presenter = restorePresenter()
         presenter?.onAttach(this)
-        binding.bLogin.setOnClickListener {
+        binding.loginButton.setOnClickListener {
             presenter?.onLogin(
-                binding.etLogin.text.toString(),
-                binding.etPassword.text.toString()
+                binding.loginEditText.text.toString(),
+                binding.passwordEditText.text.toString()
             )
         }
     }
@@ -49,13 +49,13 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     @MainThread
     override fun showProgress() {
-        binding.bLogin.isEnabled = false
+        binding.loginButton.isEnabled = false
         binding.progressBar.visibility = View.VISIBLE
     }
 
     @MainThread
     override fun hideProgress() {
-        binding.bLogin.isEnabled = true
+        binding.loginButton.isEnabled = true
         binding.progressBar.visibility = View.GONE
     }
 
